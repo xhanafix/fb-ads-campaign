@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Ads Manager Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-switch">
+        <button id="themeToggle" aria-label="Toggle theme">
+            🌓
+        </button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Facebook Ads Manager Generator</h1>
+            <p class="subtitle">Create winning Facebook Ad campaigns with AI-powered recommendations</p>
+        </header>
+
+        <div id="apiKeySection" class="api-key-section">
+            <h2>OpenRouter API Configuration</h2>
+            <div class="form-group">
+                <label for="apiKey">OpenRouter API Key:</label>
+                <input type="password" id="apiKey" required>
+                <button id="saveApiKey" class="save-btn">Save API Key</button>
+            </div>
+        </div>
+
+        <div id="configurationError" class="configuration-error hidden">
+            <p>Please configure your OpenRouter API key first</p>
+        </div>
+
+        <main>
+            <div class="input-section">
+                <h2>Tell us about your business</h2>
+                <form id="businessForm">
+                    <div class="form-group">
+                        <label for="businessType">What are you promoting?</label>
+                        <select id="businessType" required>
+                            <option value="">Select an option</option>
+                            <option value="product">Physical Product</option>
+                            <option value="digital">Digital Product</option>
+                            <option value="service">Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Describe your product/service in detail:</label>
+                        <textarea id="description" rows="4" required 
+                            placeholder="Example: I sell handmade leather wallets. They're premium quality, made from Italian leather, and target fashion-conscious men aged 25-45."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goals">What's your primary advertising goal?</label>
+                        <select id="goals" required>
+                            <option value="">Select an option</option>
+                            <option value="awareness">Brand Awareness</option>
+                            <option value="traffic">Website Traffic</option>
+                            <option value="leads">Lead Generation</option>
+                            <option value="sales">Sales/Conversions</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Monthly Budget (USD):</label>
+                        <input type="number" id="budget" min="1" required>
+                    </div>
+
+                    <button type="submit" class="generate-btn">Generate Recommendations</button>
+                </form>
+            </div>
+
+            <div id="loadingIndicator" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating your personalized recommendations...</p>
+            </div>
+
+            <div id="progressContainer" class="progress-container hidden">
+                <div class="progress-steps">
+                    <div class="progress-step" data-step="1">
+                        1
+                        <span class="progress-label">Processing Input</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        2
+                        <span class="progress-label">Generating Strategy</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        3
+                        <span class="progress-label">Formatting Results</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="results-header">
+                    <h2>Your Facebook Ads Strategy</h2>
+                    <button id="downloadBtn" class="download-btn">Download Report</button>
+                </div>
+                <div class="results-content">
+                    <section id="adObjective"></section>
+                    <section id="audienceTargeting"></section>
+                    <section id="adCopy"></section>
+                    <section id="visualAssets"></section>
+                    <section id="budgetAllocation"></section>
+                    <section id="campaignStructure"></section>
+                    <section id="abTesting"></section>
+                    <section id="performanceTracking"></section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 All Rights Reserved | <a href="https://www.hanafihassan.com" target="_blank">www.hanafihassan.com</a></p>
+        <p>Made with ❤️ in Malaysia</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

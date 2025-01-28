@@ -1,0 +1,433 @@
+:root {
+    /* Light theme variables */
+    --primary-color: #1877f2;
+    --secondary-color: #42b72a;
+    --text-color: #1c1e21;
+    --background-color: #f0f2f5;
+    --white: #ffffff;
+    --gray-light: #f5f6f7;
+    --gray: #65676b;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --error-bg: #ffebee;
+    --error-color: #c62828;
+    --success-color: #43a047;
+    --border-radius: 8px;
+    --spacing: 20px;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --primary-color: #2e89ff;
+    --secondary-color: #4cd964;
+    --text-color: #e4e6eb;
+    --background-color: #18191a;
+    --white: #242526;
+    --gray-light: #3a3b3c;
+    --gray: #b0b3b8;
+    --border-color: #3e4042;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --error-bg: #3e2727;
+    --error-color: #ff5252;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing);
+    min-height: calc(100vh - 100px); /* Adjust for footer height */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--gray);
+}
+
+.input-section {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.generate-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.generate-btn:hover {
+    background-color: #166fe5;
+}
+
+.hidden {
+    display: none;
+}
+
+#loadingIndicator {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.download-btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.results-content section {
+    background-color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.results-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .input-section {
+        padding: 20px;
+    }
+}
+
+.api-key-section {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.save-btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.configuration-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#apiKey {
+    width: calc(100% - 120px);
+}
+
+/* Add these new styles */
+.theme-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-switch button {
+    background: var(--gray-light);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.progress-container {
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gray-light);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 2;
+    background: var(--white);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--gray-light);
+    transition: all 0.3s ease;
+}
+
+.progress-step.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+}
+
+.progress-step.completed {
+    border-color: var(--success-color);
+    background: var(--success-color);
+    color: white;
+}
+
+.progress-label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    color: var(--gray);
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .progress-steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .progress-steps::before {
+        width: 2px;
+        height: 100%;
+        left: 14px;
+        top: 0;
+        transform: none;
+    }
+    
+    .progress-step {
+        margin-left: 0;
+    }
+    
+    .progress-label {
+        left: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+    
+    #apiKey {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .save-btn {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* Add animation keyframes */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.generate-btn:hover {
+    animation: pulse 1s infinite;
+}
+
+/* Add these styles at the end of the file */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: var(--gray);
+    border-top: 1px solid var(--border-color);
+}
+
+.footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+}
+
+/* Add responsive styles for footer */
+@media (max-width: 768px) {
+    .footer {
+        padding: 15px;
+        margin-top: 30px;
+    }
+}
+
+/* Add these styles for the enhanced audience targeting section */
+.targeting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.targeting-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.targeting-section h5 {
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.targeting-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.targeting-section li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.targeting-section li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.interests-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .interests-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.targeting-section strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
